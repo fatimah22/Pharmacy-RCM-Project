@@ -1,4 +1,4 @@
-#Hospital Project – Pharmacy Revenue Cycle Management
+#Hospital Project – Pharmacy Revenue Cycle Management#
 
 ###Project Summary
 This project is a hospital-focused analytics portfolio project centered on Pharmacy Revenue Cycle Management (RCM). The goal is to build a strong end-to-end analytics case that connects clinical, operational, financial, and quality concepts where relevant, with a current focus on pharmacy workflows, revenue cycle logic, KPI design, SQL transformation logic, and dashboard planning.
