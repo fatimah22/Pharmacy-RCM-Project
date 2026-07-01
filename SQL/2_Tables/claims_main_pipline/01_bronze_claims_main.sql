@@ -15,7 +15,7 @@ CREATE TABLE bronze.claims_main (
     Payer_Type NVARCHAR(50),
     Provider_Specialty NVARCHAR(50),
     Place_of_Service_Code INT,
-    Place_of_Service_Description NVARCHAR(100),
+    place_of_service_desc NVARCHAR(100),
     CPT_Code NVARCHAR(50),
     Modifier NVARCHAR(50),
     Primary_ICD10_dx NVARCHAR(50),
