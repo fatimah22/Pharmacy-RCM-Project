@@ -86,12 +86,12 @@ HAVING COUNT(DISTINCT Primary_ICD10_dx) > 1;
 SELECT DISTINCT Prior_Auth_Required
 FROM bronze.claims_main
 WHERE Prior_Auth_Required IS NULL
-   OR Prior_Auth_Required = ''
+   OR Prior_Auth_Required = '' ;
 
 SELECT DISTINCT Prior_Auth_Obtained
 FROM bronze.claims_main
 WHERE Prior_Auth_Obtained IS NULL
-   OR Prior_Auth_Obtained) = ''
+   OR Prior_Auth_Obtained = '' ;
 
 -- Obtained prior auth but missing auth number
 SELECT *
