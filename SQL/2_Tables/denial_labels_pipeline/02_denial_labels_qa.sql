@@ -104,8 +104,7 @@ SELECT DISTINCT
     Appealable
 FROM bronze.denial_labels
 WHERE Appealable IS NULL
-   OR TRIM(Appealable) = ''
-   OR TRIM(LOWER(Appealable)) NOT IN ('0', '1', 'yes', 'no', 'true', 'false');
+   OR Appealable = '';
 
 -- Range checks
 SELECT *
