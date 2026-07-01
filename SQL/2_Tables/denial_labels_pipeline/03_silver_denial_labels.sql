@@ -35,7 +35,7 @@ SELECT
     REPLACE(NULLIF(TRIM(Denial_Category), ''), '_', ' ') AS Denial_Category,
     NULLIF(TRIM(Denial_Reason_Code), '') AS Denial_Reason_Code,
     REPLACE(NULLIF(TRIM(Denial_Code_Description), ''), '_', ' ') AS Denial_Code_Description,
-    NULLIF(TRIM(Appealable), '') AS Appealable,
+    NULLIF(Appealable, '') AS Appealable,
     ROUND(Appeal_Success_Probability, 2) AS Appeal_Success_Probability,
     REPLACE(NULLIF(TRIM(Recovery_Action), ''), '_', ' ') AS Recovery_Action,
     CAST(Estimated_Recovery_USD AS DECIMAL(18,2)) AS Estimated_Recovery_USD
