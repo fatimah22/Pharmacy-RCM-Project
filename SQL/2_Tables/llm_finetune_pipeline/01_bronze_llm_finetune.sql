@@ -40,7 +40,7 @@ INSERT INTO bronze.llm_finetune2 (
     dataset_version
 )
 SELECT
-    -- Claim_ID
+    -- claim_id
     SUBSTRING(claim_id,
         CHARINDEX('"claim_id": "', claim_id) + LEN('"claim_id": "'),
         CHARINDEX('"', claim_id,
@@ -56,7 +56,7 @@ SELECT
         - (CHARINDEX('payer_type: "', payer_type) + LEN('payer_type: "'))
     ) AS payer_type,
 
-    -- specialty
+    -- specialty  *** FIXED: was using claim_id instead of specialty ***
     SUBSTRING(specialty,
         CHARINDEX('specialty: "', specialty) + LEN('specialty: "'),
         CHARINDEX('"', specialty,
@@ -64,7 +64,7 @@ SELECT
         - (CHARINDEX('specialty: "', specialty) + LEN('specialty: "'))
     ) AS specialty,
 
-    -- cpt_code
+    -- cpt_code  *** FIXED: was using claim_id instead of cpt_code ***
     SUBSTRING(cpt_code,
         CHARINDEX('cpt_code: "', cpt_code) + LEN('cpt_code: "'),
         CHARINDEX('"', cpt_code,
@@ -72,7 +72,7 @@ SELECT
         - (CHARINDEX('cpt_code: "', cpt_code) + LEN('cpt_code: "'))
     ) AS cpt_code,
 
-    -- modifier
+    -- modifier  *** FIXED: was using claim_id instead of modifier ***
     SUBSTRING(modifier,
         CHARINDEX('modifier: "', modifier) + LEN('modifier: "'),
         CHARINDEX('"', modifier,
