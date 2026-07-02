@@ -41,4 +41,5 @@ INSERT INTO silver.llm_finetune (
     dataset_version
 )
 SELECT
-    NULLIF(TRIM(Claim_ID), '') AS Claim
+    NULLIF(TRIM(Claim_ID), '') AS Claim_ID,
+    NULLIF(TRIM(payer_type), '') AS payer
