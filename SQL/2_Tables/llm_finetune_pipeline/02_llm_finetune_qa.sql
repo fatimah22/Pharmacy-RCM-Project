@@ -51,16 +51,16 @@ SELECT DISTINCT payer_type FROM bronze.llm_finetune2;
 SELECT DISTINCT specialty FROM bronze.llm_finetune2;
 SELECT DISTINCT cpt_code FROM bronze.llm_finetune2;
 SELECT DISTINCT modifier FROM bronze.llm_finetune2;
-SELECT DISTINCT prior_auth_obtained FROM bronze.llm_finetune2;
-SELECT DISTINCT [label] FROM bronze.llm_finetune2;
-SELECT DISTINCT denial_category FROM bronze.llm_finetune2;
-
-SELECT
-    MAX(CAST(doc_completeness AS FLOAT)) AS maximum,
-    MIN(CAST(doc_completeness AS FLOAT)) AS minimum
-FROM bronze.llm_finetune2;
+SELECT DISTINCT prior_auth_obtained FROM bronze.llm_finetune2;  -- True, False, None
+SELECT DISTINCT [label] FROM bronze.llm_finetune2;              -- paid, denied
+SELECT DISTINCT denial_category FROM bronze.llm_finetune2;      -- many values and (none)
 
 -- doc_completeness range check
+SELECT
+    MAX(TRY_CAST(doc_completeness AS FLOAT)) AS maximum,
+    MIN(TRY_CAST(doc_completeness AS FLOAT)) AS minimum
+FROM bronze.llm_finetune2;
+
 SELECT *
 FROM bronze.llm_finetune2
 WHERE TRY_CAST(doc_completeness AS FLOAT) < 0
@@ -79,7 +79,7 @@ FROM bronze.llm_finetune2
 GROUP BY primary_dx
 HAVING COUNT(DISTINCT LOWER(TRIM(primary_dx_desc))) > 1;
 
--- Referential integrity: Claim_ID should exist in claims_main and denial_labels
+-- Referential integrity: Claim_ID in claims_main and denial_labels
 SELECT
     l.Claim_ID AS from_llm_finetune,
     c.Claim_ID AS from_claims_main,
@@ -89,6 +89,7 @@ LEFT JOIN bronze.claims_main AS c
     ON l.Claim_ID = c.Claim_ID
 LEFT JOIN bronze.denial_labels AS d
     ON l.Claim_ID = d.Claim_ID;
+-- Note: llm_finetune2 connects to claims_main and denial_labels via Claim_ID
 
 -- CPT code alignment check with claims_main
 SELECT
