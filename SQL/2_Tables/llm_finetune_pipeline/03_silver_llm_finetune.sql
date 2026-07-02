@@ -42,4 +42,16 @@ INSERT INTO silver.llm_finetune (
 )
 SELECT
     NULLIF(TRIM(Claim_ID), '') AS Claim_ID,
-    NULLIF(TRIM(payer_type), '') AS payer
+    NULLIF(TRIM(payer_type), '') AS payer_type,
+    NULLIF(TRIM(specialty), '') AS specialty,
+    NULLIF(TRIM(cpt_code), '') AS cpt_code,
+    NULLIF(TRIM(modifier), '') AS modifier,
+    NULLIF(TRIM(primary_dx), '') AS primary_dx,
+    NULLIF(TRIM(primary_dx_desc), '') AS primary_dx_desc,
+    NULLIF(TRIM(prior_auth_obtained), '') AS prior_auth_obtained,
+    TRY_CAST(doc_completeness AS DECIMAL(10,2)) AS doc_completeness,
+    TRY_CAST(claim_amount_usd AS DECIMAL(10,2)) AS claim_amount_usd,
+    NULLIF(TRIM([label]), '') AS [label],
+    NULLIF(TRIM(denial_category), '') AS denial_category,
+    NULLIF(TRIM(dataset_version), '') AS dataset_version
+FROM bronze.llm_finetune2;
