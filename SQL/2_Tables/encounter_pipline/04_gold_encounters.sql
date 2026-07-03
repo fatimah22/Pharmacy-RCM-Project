@@ -10,7 +10,7 @@ SELECT
     Start_Date,
     Stop_Date,
     Patient_Code,
-    Organization,
+    Organization_Code,
     Provider_Code,
     Payer_Code,
     Encounter_Class,
