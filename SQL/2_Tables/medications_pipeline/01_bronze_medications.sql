@@ -1,0 +1,37 @@
+-- =========================================================
+-- MEDICATIONS TABLE
+-- 01_bronze_medications.sql
+-- Purpose: Create and load the raw medications table in Bronze
+-- =========================================================
+
+IF OBJECT_ID('bronze.medications', 'U') IS NOT NULL
+    DROP TABLE bronze.medications;
+
+CREATE TABLE bronze.medications (
+    Start_Date DATE,
+    Stop_Date DATE,
+    Patient_Code NVARCHAR(100),
+    Payer_Code NVARCHAR(100),
+    Encounter_Code NVARCHAR(100),
+    Code NVARCHAR(50),
+    Description NVARCHAR(500),
+    Base_Cost DECIMAL(10,2),
+    Payer_Coverage DECIMAL(10,2),
+    Dispenses INT,
+    Total_Cost DECIMAL(10,2),
+    Reason_Code NVARCHAR(50),
+    Reason_Description NVARCHAR(100)
+);
+
+TRUNCATE TABLE bronze.medications;
+
+BULK INSERT bronze.medications
+FROM 'C:\Users\fatima abdullah\OneDrive\Desktop\Projects\Hospital\100k_synthea_covid19_csv\medications.csv'
+WITH (
+    FORMAT = 'CSV',
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '0x0A',
+    CODEPAGE = '65001',
+    TABLOCK
+);
