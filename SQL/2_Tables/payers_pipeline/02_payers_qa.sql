@@ -92,7 +92,7 @@ SELECT
     COUNT(DISTINCT m.Encounter_Code) AS medication_count,
     COUNT(DISTINCT t.Patient_Code) AS transition_count
 FROM bronze.payers AS p
-LEFT JOIN bronze.encounters AS e
+LEFT JOIN silver.encounters AS e
     ON p.ID = e.Payer_Code
 LEFT JOIN bronze.medications AS m
     ON p.ID = m.Payer_Code
