@@ -8,7 +8,7 @@ IF OBJECT_ID('silver.payers', 'U') IS NOT NULL
     DROP TABLE silver.payers;
 
 CREATE TABLE silver.payers (
-    ID NVARCHAR(100),
+    Payer_Code NVARCHAR(100),
     Name NVARCHAR(100),
     Address NVARCHAR(100),
     City NVARCHAR(50),
@@ -34,7 +34,7 @@ CREATE TABLE silver.payers (
 TRUNCATE TABLE silver.payers;
 
 INSERT INTO silver.payers (
-    ID,
+    Payer_Code,
     Name,
     Address,
     City,
