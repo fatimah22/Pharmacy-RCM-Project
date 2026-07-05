@@ -111,5 +111,4 @@ FROM bronze.simulated_nhis_healthcare_claims AS s
 LEFT JOIN bronze.patients AS p
     ON s.Patient_ID = p.Patient_Code
 WHERE p.Patient_Code IS NULL;
--- Expected: most or all records will not match
--- This is a standalone fraud simulation dataset, not linked to Synthea patients
+
