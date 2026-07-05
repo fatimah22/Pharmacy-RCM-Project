@@ -6,7 +6,7 @@
 
 CREATE OR ALTER VIEW gold.payers AS
 SELECT
-    ID,
+    Payer_Code,
     Name,
     Address,
     City,
