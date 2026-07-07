@@ -29,3 +29,9 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a clean and reporting-ready version of the encounters data with additional derived metrics such as encounter duration, non-covered amount, coverage percentage, same-day encounter flag, and encounter class grouping.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_encounters`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_encounters_desc`, `gold.dim_encounters_reason`) — contain the descriptive/reference data used for reporting.
+
