@@ -4,7 +4,7 @@
 -- Purpose: Create the Gold-layer reporting view for encounters
 -- =========================================================
 
-CREATE OR ALTER VIEW gold.encounters AS
+CREATE OR ALTER VIEW gold.fact_encounters AS
 SELECT
     Encounter_Code,
     Start_Date,
@@ -15,12 +15,10 @@ SELECT
     Payer_Code,
     Encounter_Class,
     Code,
-    Description,
     Base_Encounter_Cost,
     Total_Claim_Cost,
     Payer_Coverage,
     Reason_Code,
-    Reason_Description,
     Encounter_Date,
     Encounter_Year,
     Encounter_Month,
@@ -48,4 +46,18 @@ SELECT
         WHEN LOWER(Encounter_Class) IN ('wellness', 'outpatient', 'ambulatory') THEN 'Routine'
         ELSE 'Admitted'
     END AS encounter_class_group
+FROM silver.encounters;
+
+-- create dimension tabel 
+CREATE OR ALTER VIEW gold.dim_encounters_desc AS
+SELECT DISTINCT 
+    Code,
+    Description
+FROM silver.encounters;
+
+-- create dimension tabel 
+CREATE OR ALTER VIEW gold.dim_encounters_reason AS
+SELECT DISTINCT 
+    Reason_Code,
+    Reason_Description
 FROM silver.encounters;
