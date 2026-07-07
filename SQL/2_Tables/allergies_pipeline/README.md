@@ -1,29 +1,9 @@
-# allergies_pipeline
-
-## Overview
-This folder contains the end-to-end SQL pipeline for the `allergies` table using the medallion architecture: Bronze, QA, Silver, and Gold.
-
-## Files
-- `01_bronze_allergies.sql`: Creates and loads the raw allergies table in the Bronze layer.
-- `02_allergies_qa.sql`: Runs data quality checks on the Bronze table.
-- `03_silver_allergies.sql`: Creates and loads the cleaned allergies table in the Silver layer.
-- `04_gold_allergies.sql`: Creates the reporting-ready Gold view for allergies.
-
-## Table Purpose
-The `allergies` table captures allergy-related records linked to patients and encounters. It includes date fields, patient and encounter identifiers, an allergy code, and an allergy description.
-
-## Key Data Quality Rules
-- `Patient_Code` should exist in `patients`.
-- `Encounter_Code` should exist in `encounters`.
-- `Stop_Date` should not be earlier than `Start_Date`.
-- Key text columns should not be blank or whitespace-only.
-- One `allergies_Code` should map consistently to one normalized `allergies_Description`.
-
-## Silver Cleaning Logic
-The Silver layer applies:
-- text trimming,
-- blank-to-NULL conversion,
-- basic preservation of raw business meaning for downstream use.
-
-## Gold Output
-The Gold view exposes a clean and reporting-ready version of the allergies data for downstream analysis and dashboarding.
+## Pipeline Stages
+- **01_bronze_allergies.sql**: Raw ingestion from CSV source (Synthea COVID-19 dataset) into bronze.allergies.
+- **02_allergies_qa.sql**: Data quality checks (null checks, invalid date logic, duplicates, code-description consistency, referential integrity vs patients/encounters).
+- **03_silver_allergies.sql**: Cleaned layer — trims whitespace, converts blanks to NULL.
+- **04_gold_allergies.sql**: Business-ready layer built entirely within the **gold schema**, containing two views:
+  - `gold.fact_allergies` — the Fact table view, holding transactional-level allergy records (Start_Date, Stop_Date, Patient_Code, Encounter_Code, allergies_Code).
+  - `gold.dim_allergies` — the Dimension table view, holding the distinct lookup of allergies_Code and its Description.
+  
+  Both objects live in the same **gold** schema, separating Fact and Dimension logically by naming convention (`fact_` / `dim_` prefix) rather than by separate schemas.
