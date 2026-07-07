@@ -28,3 +28,9 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a clean and reporting-ready version of the conditions data for downstream analysis, documentation, and integration with other clinical and operational tables.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_conditions`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_conditions`) — contain the descriptive/reference data used for reporting.
+
