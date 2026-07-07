@@ -1,34 +1,30 @@
--- =========================================================
--- CAREPLANS TABLE
--- 04_gold_careplans.sql
--- Purpose: Create the Gold-layer reporting view for careplans
--- =========================================================
-
-
-CREATE OR ALTER VIEW gold.claims_main AS
+CREATE OR ALTER VIEW gold.fact_careplans AS
 SELECT
-    Claim_ID,
-    Claim_Submission_Date,
-    Claim_Year,
-    Claim_Quarter,
-    Payer_Type,
-    Provider_Specialty,
-    Place_of_Service_Code,
-    place_of_service_descreption,
-    CPT_Code,
-    Modifier,
-    Primary_ICD10_dx,
-    Primary_ICD10_desc,
-    Secondary_ICD10_dx,
-    Secondary_DX_Count,
-    Prior_Auth_Required,
-    Prior_Auth_Obtained,
-    Prior_Auth_Number,
-    Documentation_Completeness,
-    Claim_Amount_USD,
-    Outcome,
-    Denial_Reason_Code,
-    Denial_Category,
-    Synthetic_Flag,
-    Generation_Date
-FROM silver.claims_main;
+    Careplans_Code,
+    Start_Date,
+    Stop_Date,
+    Patient_Code,
+    Encounter_Code,
+    Code,
+    Reason_Code,
+    dq_code_conflict_flag,
+    dq_reason_code_conflict_flag,
+    dq_missing_patient_flag,
+    dq_missing_encounter_flag
+FROM silver.careplans;
+
+CREATE OR ALTER VIEW gold.dim_careplans_type AS
+SELECT DISTINCT
+    Code,
+    careplan_Description,
+    dq_code_conflict_flag
+FROM silver.careplans
+WHERE Code IS NOT NULL;
+
+CREATE OR ALTER VIEW gold.dim_careplans_reason AS
+SELECT DISTINCT
+    Reason_Code,
+    Reason_Description,
+    dq_reason_code_conflict_flag
+FROM silver.careplans
+WHERE Reason_Code IS NOT NULL;
