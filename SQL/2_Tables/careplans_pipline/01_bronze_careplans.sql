@@ -1,9 +1,3 @@
--- =========================================================
--- CAREPLANS TABLE
--- 01_bronze_careplans.sql
--- Purpose: Create and load the raw careplans table in Bronze
--- =========================================================
-
 IF OBJECT_ID('bronze.careplans', 'U') IS NOT NULL
     DROP TABLE bronze.careplans;
 
