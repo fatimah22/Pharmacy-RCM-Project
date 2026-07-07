@@ -29,7 +29,7 @@ The Silver layer applies:
 - preservation of raw reason values,
 - and creation of `dq_reason_code_conflict_flag` for conflicting reason mappings.
 
-
+## Gold Layer
 > The Gold layer does **not** contain physical tables.
 > It is built entirely from **Views**:
 > - **Fact View** (`gold.fact_careplans`) — contains the transactional data with all dq flags.
