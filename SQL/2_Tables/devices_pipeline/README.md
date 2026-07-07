@@ -28,3 +28,9 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a clean and reporting-ready version of the devices data for downstream analysis and integration with other patient and encounter-level datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_devices`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_device_type`) — contain the descriptive/reference data used for reporting.
+
