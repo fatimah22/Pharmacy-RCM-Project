@@ -1,89 +1,62 @@
--- =========================================================
--- CAREPLANS TABLE
--- 03_silver_careplans.sql
--- Purpose: Create and load the cleaned careplans table in Silver
--- =========================================================
-IF OBJECT_ID('silver.claims_main', 'U') IS NOT NULL
-    DROP TABLE silver.claims_main;
+IF OBJECT_ID('silver.careplans', 'U') IS NOT NULL
+    DROP TABLE silver.careplans;
 
-CREATE TABLE silver.claims_main (
-    Claim_ID NVARCHAR(50),
-    Claim_Submission_Date DATE,
-    Claim_Year INT,
-    Claim_Quarter NVARCHAR(50),
-    Payer_Type NVARCHAR(50),
-    Provider_Specialty NVARCHAR(50),
-    Place_of_Service_Code INT,
-    place_of_service_descreption NVARCHAR(100),
-    CPT_Code NVARCHAR(50),
-    Modifier NVARCHAR(50),
-    Primary_ICD10_dx NVARCHAR(50),
-    Primary_ICD10_desc NVARCHAR(100),
-    Secondary_ICD10_dx NVARCHAR(50),
-    Secondary_DX_Count NVARCHAR(50),
-    Prior_Auth_Required NVARCHAR(50),
-    Prior_Auth_Obtained NVARCHAR(50),
-    Prior_Auth_Number NVARCHAR(50),
-    Documentation_Completeness FLOAT,
-    Claim_Amount_USD DECIMAL(18,2),
-    Outcome NVARCHAR(50),
-    Denial_Reason_Code NVARCHAR(50),
-    Denial_Category NVARCHAR(50),
-    Synthetic_Flag NVARCHAR(50),
-    Generation_Date DATE
+CREATE TABLE silver.careplans (
+    Careplans_Code NVARCHAR(100),
+    Start_Date DATE,
+    Stop_Date DATE,
+    Patient_Code NVARCHAR(100),
+    Encounter_Code NVARCHAR(100),
+    Code NVARCHAR(50),
+    careplan_Description NVARCHAR(300),
+    Reason_Code NVARCHAR(50),
+    Reason_Description NVARCHAR(300),
+    dq_code_conflict_flag INT,
+    dq_reason_code_conflict_flag INT,
+    dq_missing_patient_flag INT,
+    dq_missing_encounter_flag INT
 );
 
-TRUNCATE TABLE silver.claims_main;
+TRUNCATE TABLE silver.careplans;
 
-INSERT INTO silver.claims_main (
-    Claim_ID,
-    Claim_Submission_Date,
-    Claim_Year,
-    Claim_Quarter,
-    Payer_Type,
-    Provider_Specialty,
-    Place_of_Service_Code,
-    place_of_service_descreption,
-    CPT_Code,
-    Modifier,
-    Primary_ICD10_dx,
-    Primary_ICD10_desc,
-    Secondary_ICD10_dx,
-    Secondary_DX_Count,
-    Prior_Auth_Required,
-    Prior_Auth_Obtained,
-    Prior_Auth_Number,
-    Documentation_Completeness,
-    Claim_Amount_USD,
-    Outcome,
-    Denial_Reason_Code,
-    Denial_Category,
-    Synthetic_Flag,
-    Generation_Date
+WITH bad_reason_codes AS (
+    SELECT Reason_Code
+    FROM bronze.careplans
+    GROUP BY Reason_Code
+    HAVING COUNT(DISTINCT LOWER(TRIM(Reason_Description))) > 1
+),
+bad_codes AS (
+    SELECT Code
+    FROM bronze.careplans
+    GROUP BY Code
+    HAVING COUNT(DISTINCT LOWER(TRIM(Description))) > 1
+)
+INSERT INTO silver.careplans (
+    Careplans_Code, Start_Date, Stop_Date, Patient_Code, Encounter_Code,
+    Code, careplan_Description, Reason_Code, Reason_Description,
+    dq_code_conflict_flag, dq_reason_code_conflict_flag,
+    dq_missing_patient_flag, dq_missing_encounter_flag
 )
 SELECT
-    NULLIF(TRIM(Claim_ID), '') AS Claim_ID,
-    Claim_Submission_Date,
-    Claim_Year,
-    NULLIF(Claim_Quarter, '') AS Claim_Quarter,
-    NULLIF(TRIM(Payer_Type), '') AS Payer_Type,
-    NULLIF(TRIM(Provider_Specialty), '') AS Provider_Specialty,
-    Place_of_Service_Code,
-    NULLIF(TRIM(place_of_service_desc), '') AS place_of_service_desc,
-    NULLIF(TRIM(CPT_Code), '') AS CPT_Code,
-    NULLIF(Modifier, '') AS Modifier,
-    NULLIF(TRIM(Primary_ICD10_dx), '') AS Primary_ICD10_dx,
-    NULLIF(TRIM(Primary_ICD10_desc), '') AS Primary_ICD10_desc,
-    NULLIF(TRIM(Secondary_ICD10_dx), '') AS Secondary_ICD10_dx,
-    NULLIF(Secondary_DX_Count, '') AS Secondary_DX_Count,
-    NULLIF(Prior_Auth_Required, '') AS Prior_Auth_Required,
-    NULLIF(Prior_Auth_Obtained, '') AS Prior_Auth_Obtained,
-    NULLIF(TRIM(Prior_Auth_Number), '') AS Prior_Auth_Number,
-    Documentation_Completeness,
-    Claim_Amount_USD,
-    NULLIF(TRIM(Outcome), '') AS Outcome,
-    NULLIF(TRIM(Denial_Reason_Code), '') AS Denial_Reason_Code,
-    NULLIF(TRIM(Denial_Category), '') AS Denial_Category,
-    NULLIF(TRIM(Synthetic_Flag), '') AS Synthetic_Flag,
-    Generation_Date
-FROM bronze.claims_main;
+    NULLIF(TRIM(c.ID), '') AS Careplans_Code,
+    c.Start_Date,
+    c.Stop_Date,
+    NULLIF(TRIM(c.Patient_Code), '') AS Patient_Code,
+    NULLIF(TRIM(c.Encounter_Code), '') AS Encounter_Code,
+    NULLIF(TRIM(c.Code), '') AS Code,
+    CASE
+        WHEN LOWER(TRIM(c.Description)) = 'care plan (record artifact)' THEN 'care plan'
+        WHEN LOWER(TRIM(c.Description)) = 'mental health care plan (record artifact)' THEN 'mental health care plan'
+        ELSE LOWER(TRIM(c.Description))
+    END AS Description,
+    NULLIF(TRIM(c.Reason_Code), '') AS Reason_Code,
+    NULLIF(TRIM(c.Reason_Description), '') AS Reason_Description,
+    CASE WHEN bc.Code IS NOT NULL THEN 1 ELSE 0 END AS dq_code_conflict_flag,
+    CASE WHEN b.Reason_Code IS NOT NULL THEN 1 ELSE 0 END AS dq_reason_code_conflict_flag,
+    CASE WHEN p.Patient_Code IS NULL THEN 1 ELSE 0 END AS dq_missing_patient_flag,
+    CASE WHEN e.Encounter_Code IS NULL THEN 1 ELSE 0 END AS dq_missing_encounter_flag
+FROM bronze.careplans AS c
+LEFT JOIN bad_reason_codes AS b ON c.Reason_Code = b.Reason_Code
+LEFT JOIN bad_codes AS bc ON c.Code = bc.Code
+LEFT JOIN bronze.patients AS p ON c.Patient_Code = p.Patient_Code
+LEFT JOIN bronze.encounters AS e ON c.Encounter_Code = e.Encounter_Code;
