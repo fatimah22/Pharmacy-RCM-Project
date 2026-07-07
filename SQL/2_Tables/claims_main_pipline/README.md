@@ -34,3 +34,8 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a cleaned, reporting-ready claims dataset for RCM analysis, KPI calculation, denial analysis, and dashboard development.
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_claims_main`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (` gold.dim_place_of_service`, `gold.dim_ICD10`) — contain the descriptive/reference data used for reporting.
+
