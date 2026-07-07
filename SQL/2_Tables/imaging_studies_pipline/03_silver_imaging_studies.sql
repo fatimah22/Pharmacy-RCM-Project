@@ -8,7 +8,7 @@ IF OBJECT_ID('silver.imaging_studies', 'U') IS NOT NULL
     DROP TABLE silver.imaging_studies;
 
 CREATE TABLE silver.imaging_studies (
-    ID NVARCHAR(50),
+    Imaging_ID NVARCHAR(50),
     [Date] DATE,
     Patient_Code NVARCHAR(50),
     Encounter_Code NVARCHAR(50),
@@ -23,7 +23,7 @@ CREATE TABLE silver.imaging_studies (
 TRUNCATE TABLE silver.imaging_studies;
 
 INSERT INTO silver.imaging_studies (
-    ID,
+    Imaging_ID,
     [Date],
     Patient_Code,
     Encounter_Code,
