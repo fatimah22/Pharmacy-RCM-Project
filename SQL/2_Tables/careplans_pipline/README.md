@@ -29,29 +29,10 @@ The Silver layer applies:
 - preservation of raw reason values,
 - and creation of `dq_reason_code_conflict_flag` for conflicting reason mappings.
 
-## Gold Output
-The Gold view exposes a clean and reporting-ready version of the careplans data for downstream analysis, documentation, and dashboard use.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_careplans`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_careplans_type`, `gold.dim_careplans_reason`) — contain the descriptive/reference data used for reporting.
 
 
-----
-# careplans_pipeline
-
-## Overview
-This folder contains the end-to-end SQL pipeline for the `careplans` table using the medallion architecture: Bronze, QA, Silver, and Gold.
-
-## Files
-- **01_bronze_careplans.sql** — Raw table creation and BULK INSERT from CSV.
-- **02_careplans_qa.sql** — Data quality checks: duplicates, nulls, blanks, invalid dates, missing FK references, code/description conflicts.
-- **03_silver_careplans.sql** — Cleaned table with standardized descriptions and 4 dq flags (code conflict, reason conflict, missing patient, missing encounter).
-- **04_gold_careplans.sql** — Star-schema views: fact_careplans, dim_careplans_type, dim_careplans_reason.
-
-## Data Quality Flags
-| Flag | Meaning |
-|---|---|
-| dq_code_conflict_flag | Code maps to more than one distinct Description |
-| dq_reason_code_conflict_flag | Reason_Code maps to more than one distinct Reason_Description |
-| dq_missing_patient_flag | Patient_Code not found in bronze.patients |
-| dq_missing_encounter_flag | Encounter_Code not found in bronze.encounters |
-
-## Key Fix
-Missing-encounter check now correctly compares bronze.careplans against **bronze.encounters** (was previously joined against silver.encounters, a layer-mismatch bug).
