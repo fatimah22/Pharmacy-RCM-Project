@@ -31,3 +31,9 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a clean and reporting-ready version of the imaging studies data for downstream analysis and integration with other encounter-level and patient-level datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fac_imaging_studies`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_Bodysite`, `gold.dim_Modality`, `gold.dim_SOP`) — contain the descriptive/reference data used for reporting.
+
