@@ -30,3 +30,9 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a clean and reporting-ready version of the denial_labels data for denial trend analysis, recovery prioritization, and dashboard development.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_denial_labels`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_denial_reason`) — contain the descriptive/reference data used for reporting.
+
