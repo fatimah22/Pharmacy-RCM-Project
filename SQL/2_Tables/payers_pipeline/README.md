@@ -82,3 +82,8 @@ derived metrics:
 - `Total_Encounters`, `Total_Medications`, `Total_Procedures`,
   `Total_Immunizations`: combined covered and uncovered counts
   per service category.
+
+ > The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Dimension Views** (`gold.dim_payers`) — contain the descriptive/reference data used for reporting.
+ 
