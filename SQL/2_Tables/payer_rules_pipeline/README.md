@@ -86,6 +86,8 @@ The Silver layer applies:
 - all numeric fields passed through as-is from Bronze since
   they are already typed correctly.
 
+
+
 ---
 
 ## Gold Output
@@ -93,3 +95,7 @@ The Gold view exposes a clean and reporting-ready version of the
 payer rules data for use in prior authorization analysis, denial
 rate benchmarking, and payment turnaround reporting across payer
 types and CPT codes.
+
+  > The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Dimension Views** (`gold.dim_payer_rules`) — contain the descriptive/reference data used for reporting.
