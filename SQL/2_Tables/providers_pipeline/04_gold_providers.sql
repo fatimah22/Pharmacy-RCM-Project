@@ -4,7 +4,7 @@
 -- Purpose: Create the Gold-layer reporting view for providers
 -- =========================================================
 
-CREATE OR ALTER VIEW gold.providers AS
+CREATE OR ALTER VIEW gold.dim_providers AS
 SELECT
     Provider_Code,
     Organization_Code,
@@ -19,3 +19,4 @@ SELECT
     LON,
     Utilization
 FROM silver.providers;
+
