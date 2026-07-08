@@ -137,3 +137,8 @@ The Silver layer applies:
 The Gold view exposes a clean and reporting-ready version of the
 observations data including all Silver flags for downstream filtering,
 clinical analysis, and integration with patient and encounter datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_observations_encounter` , `gold.fact_observations_patient_outcomes`) — contains the transactional data with all dq flags.
+
