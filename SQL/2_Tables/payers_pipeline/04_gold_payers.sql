@@ -4,7 +4,7 @@
 -- Purpose: Create the Gold-layer reporting view for payers
 -- =========================================================
 
-CREATE OR ALTER VIEW gold.payers AS
+CREATE OR ALTER VIEW gold.dim_payers AS
 SELECT
     Payer_Code,
     Name,
