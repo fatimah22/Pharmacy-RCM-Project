@@ -4,7 +4,7 @@
 -- Purpose: Create the Gold-layer reporting view for organizations
 -- =========================================================
 
-CREATE OR ALTER VIEW gold.organizations AS
+CREATE OR ALTER VIEW gold.fact_organizations AS
 SELECT
     Organization_Code,
     Organization_Name,
