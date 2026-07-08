@@ -35,3 +35,9 @@ The Silver layer applies:
 The Gold view exposes a clean and reporting-ready version of the immunizations
 data for downstream analysis and integration with encounter-level and
 patient-level datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_immunizations`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_immunizations`) — contain the descriptive/reference data used for reporting.
+
