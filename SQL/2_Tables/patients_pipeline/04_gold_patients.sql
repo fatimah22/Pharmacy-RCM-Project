@@ -4,7 +4,7 @@
 -- Purpose: Create the Gold-layer reporting view for patients
 -- =========================================================
 
-CREATE OR ALTER VIEW gold.patients AS
+CREATE OR ALTER VIEW gold.dim_patients AS
 SELECT
     Patient_Code,
     Birthdate,
