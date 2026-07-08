@@ -67,3 +67,9 @@ The Silver layer applies:
 The Gold view exposes a clean and reporting-ready version of the
 payer transitions data for downstream analysis of patient coverage
 history, payer mix trends, and longitudinal payer attribution.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_payer_transitions`) — contains the transactional data with all dq flags.
+
+
