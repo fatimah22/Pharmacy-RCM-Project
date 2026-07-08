@@ -99,3 +99,8 @@ The Silver layer applies:
 The Gold view exposes a clean and reporting-ready version of the
 organizations data for use as a reference dimension in encounter-level
 analysis, provider performance reporting, and geographic visualizations.
+
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_organizations`) — contains the transactional data with all dq flags.
