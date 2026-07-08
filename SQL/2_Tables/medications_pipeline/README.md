@@ -47,3 +47,9 @@ The Silver layer applies:
 The Gold view exposes a clean and reporting-ready version of the medications
 data for downstream analysis, cost and coverage reporting, and integration
 with patient and encounter datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_medications`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_medication`) — contain the descriptive/reference data used for reporting.
+
