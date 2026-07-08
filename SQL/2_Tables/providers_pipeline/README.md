@@ -91,3 +91,8 @@ The Silver layer applies:
 The Gold view exposes a clean and reporting-ready version of the
 providers data for use as a reference dimension in encounter-level
 analysis, provider performance reporting, and geographic visualization.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Dimension Views** (`gold.dim_providers`) — contain the descriptive/reference data used for reporting.
+
