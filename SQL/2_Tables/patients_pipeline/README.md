@@ -31,3 +31,8 @@ The Silver layer applies:
 
 ## Gold Output
 The Gold view exposes a clean and reporting-ready version of the patients data with a derived age field for downstream analysis and integration with related hospital datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Dimension Views** (`gold.dim_patients`) — contain the descriptive/reference data used for reporting.
+
