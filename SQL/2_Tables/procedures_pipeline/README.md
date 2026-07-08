@@ -92,3 +92,9 @@ The Gold view exposes a clean and reporting-ready version of the
 procedures data including all Silver flags for downstream clinical
 analysis, cost reporting, and integration with patient and
 encounter datasets.
+
+> The Gold layer does **not** contain physical tables.
+> It is built entirely from **Views**:
+> - **Fact View** (`gold.fact_procedures`) — contains the transactional data with all dq flags.
+> - **Dimension Views** (`gold.dim_procedure_disc`) — contain the descriptive/reference data used for reporting.
+
