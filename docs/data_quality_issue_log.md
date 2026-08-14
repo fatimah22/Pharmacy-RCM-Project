@@ -1,7 +1,8 @@
 # Data Quality Issue Log
 
 **Project:** Hospital Analytics – Pharmacy & Revenue Cycle Management  
-**Last Updated:** July 2026
+**Last Updated:** August 2026  
+**Total Issues Catalogued:** 26 (DQ-001 → DQ-026)
 
 ---
 
@@ -34,7 +35,7 @@
 | DQ-013 | patients | First, Last, Maiden | Formatting Issue | Name fields contain trailing numeric artifacts from source system | Warning | Multiple | Stripped using PATINDEX logic in Silver | Silver |
 | DQ-014 | patients | Birthplace | Structural Issue | Birthplace stored as single concatenated string with city, state, and country | Info | All | Parsed into Birth_City, Birth_State_Province, Birth_Country_Code in Silver | Silver |
 | DQ-015 | patients | Marital, Gender, Ethnicity | Non-Standard Values | Raw values use abbreviated or non-standard labels | Warning | Multiple | Normalized to full descriptive values in Silver | Silver |
-| DQ-016 | payers | Address, City, State_HeadQuartered, ZIP, Phone | Missing Values | Null values in contact and location fields | Info | Multiple | Accepted as optional contact data; NULLIF applied | Silver |
+| DQ-016 | payers | Address, City, State_HeadQuartered, ZIP, Phone | Missing Values | Null values in contact and location fields | Info | Multiple | Accepted as optional contact data; NULLIF applied to text fields (Address, City, State_HeadQuartered, Phone). ZIP is typed INT, so blanks are already NULL at load with no NULLIF needed | Silver |
 | DQ-017 | organizations | Phone | Missing Values | Null values in Phone column | Info | Multiple | Accepted as optional; NULLIF applied | Silver |
 | DQ-018 | simulated_nhis_healthcare_claims | Patient_ID | Referential Mismatch | Patient_IDs do not match Patient_Code in patients table | Info | All | Expected behavior; this is a standalone NHIS dataset with its own ID space | N/A |
 | DQ-019 | llm_finetune | specialty, cpt_code, modifier | Parsing Error | Original Bronze parsing used wrong column reference (claim_id) in CHARINDEX causing incorrect extractions | Critical | All | Fixed by correcting CHARINDEX to reference the correct source column per field | Bronze |
@@ -44,3 +45,9 @@
 | DQ-023 | claims_main | Prior_Auth_Number | Business Rule Violation | Records where Prior_Auth_Obtained indicates yes but Prior_Auth_Number is null | Warning | Multiple | Flagged in QA for review | QA |
 | DQ-024 | denial_labels | denial_code_description, recovery_action | Formatting Issue | Values contain underscores instead of spaces | Warning | Multiple | Replaced underscores using REPLACE in Silver | Silver |
 | DQ-025 | providers | Gender | Non-Standard Values | Gender stored as M / F abbreviations | Warning | Multiple | Normalized to Male / Female in Silver | Silver |
+| DQ-026 | careplans | Patient_Code, Encounter_Code | Referential Integrity | Some care plans reference a Patient_Code or Encounter_Code with no matching row in patients/encounters | Info | Multiple | Flagged using dq_missing_patient_flag / dq_missing_encounter_flag; not filtered from Silver so the care plan record is preserved | Silver |
+
+---
+
+## Coverage Note
+This log catalogues issues actually found during Bronze-level QA profiling. Of the project's 22 tables, 15 have at least one logged issue above. The remaining tables — `allergies`, `devices`, `encounters`, `immunizations`, `payer_rules`, `supplies`, and `train_test_split` — were profiled with the same QA process ([`data_quality-rules.md`](./data_quality-rules.md)) and no material issues were found worth logging; their absence here reflects a clean QA pass, not a skipped check.

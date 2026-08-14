@@ -16,7 +16,7 @@ The Bronze layer stores raw imported source data with minimal transformation.
 - Raw values are loaded as received from the source files, with no cleaning applied.
 - Each of the 19 fully-piped tables has its own `01_bronze_<table>.sql` script under `SQL/2_Tables/<table>_pipeline/`.
 - A dedicated QA script (`02_<table>_qa.sql`) profiles each Bronze table — checking for nulls, duplicate keys, conflicting code-to-description mappings, referential mismatches, and business-rule violations — before any cleaning is applied.
-- Findings from this QA step are catalogued in [`data_quality_issue_log.md`](./data_quality_issue_log.md) (25 issues, DQ-001 through DQ-025) and drove the cleaning logic implemented in Silver.
+- Findings from this QA step are catalogued in [`data_quality_issue_log.md`](./data_quality_issue_log.md) (26 issues, DQ-001 through DQ-026) and drove the cleaning logic implemented in Silver.
 
 ## Silver Layer
 The Silver layer contains cleaned, standardized, and conformed data (`silver.<table>`).

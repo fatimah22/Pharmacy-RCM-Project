@@ -15,7 +15,7 @@ This is a completed, end-to-end healthcare analytics portfolio project centered 
 - **37 Gold-layer views** (fact + dimension) built across all pipelines.
 - **15 Gold-layer views** selected and connected into the final Power BI semantic model, spanning `careplans`, `claims_main`, `denial_labels`, `encounters`, `medications`, `organizations`, `patients`, `payer_rules`, and `payers`. See [`data-dictionary.md`](./data-dictionary.md) for the full table-to-view mapping.
 - A **19-page Power BI dashboard** ("RCM Analytics – Pharmacy & Revenue Cycle") covering Executive Overview, Utilization & Population context, Payer/Specialty/Claims activity, Prior Authorization & Claim Outcomes, Denial & Financial Impact, and Recovery & Appeals Strategy. See [`dashboard-plan.md`](./dashboard-plan.md) for the full page-by-page structure.
-- A documented data quality process: 25 catalogued issues (`data_quality_issue_log.md`) with severity ratings and the Silver-layer fix applied for each.
+- A documented data quality process: 26 catalogued issues (`data_quality_issue_log.md`) with severity ratings and the Silver-layer fix applied for each.
 
 ## Current Focus Areas
 - Pharmacy analytics
@@ -45,7 +45,7 @@ This is a completed, end-to-end healthcare analytics portfolio project centered 
 - Silver-layer cleaning and standardization logic
 - Gold-layer analytical views (37 views; 15 used in the final dashboard)
 - Data dictionary covering all 22 tables, with Gold-view usage flagged
-- Data quality rules and issue log (25 catalogued issues)
+- Data quality rules and issue log (26 catalogued issues)
 - 19-page Power BI dashboard, documented in `dashboard-plan.md`
 - GitHub-ready, medallion-organized project structure
 

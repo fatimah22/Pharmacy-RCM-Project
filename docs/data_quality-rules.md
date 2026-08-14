@@ -1,7 +1,10 @@
 # Data Quality Rules
 
+**Project:** Hospital Analytics – Pharmacy & Revenue Cycle Management  
+**Last Updated:** August 2026
+
 ## Purpose
-This document outlines the main data quality rules used across the project. These checks are applied primarily in the Bronze layer before data is cleaned and standardized in Silver.
+This document outlines the main data quality rules applied across all 22 tables in the project. These checks are run primarily in each table's Bronze-level QA script (`02_<table>_qa.sql`) before data is cleaned and standardized in Silver. For the concrete findings these rules surfaced, see [`data_quality_issue_log.md`](./data_quality_issue_log.md), which catalogues 26 issues (DQ-001 → DQ-026) across 16 of the 22 tables.
 
 ## Main Quality Dimensions
 - Completeness
@@ -82,9 +85,12 @@ Quality issues found in Bronze may be handled in Silver through:
 - and documenting transformation choices.
 
 ## Documentation Standard
-For each table, the following should be documented where relevant:
+For each table, the following is documented where relevant (see `data_quality_issue_log.md` for the applied format):
 - quality issue found,
-- business impact,
+- business impact / severity,
 - root cause hypothesis,
 - cleaning approach in Silver,
 - and expected Gold-layer usage.
+
+## Applied Across the Project
+Every one of the 22 tables was run through this rule set during Bronze QA. Tables with no entry in the issue log (`allergies`, `devices`, `encounters`, `immunizations`, `payer_rules`, `supplies`, `train_test_split`) passed this profiling without a material finding worth logging — the rules were still applied, they simply did not surface an issue.

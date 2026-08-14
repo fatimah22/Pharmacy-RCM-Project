@@ -12,7 +12,7 @@ An end-to-end healthcare analytics project that takes raw hospital source data t
 | **Gold-layer views built** | 37 (fact + dimension) |
 | **Gold views used in the final dashboard** | 15 |
 | **Dashboard** | 19-page Power BI report — "RCM Analytics – Pharmacy & Revenue Cycle" |
-| **Data quality issues documented** | 25 (DQ-001 → DQ-025) |
+| **Data quality issues documented** | 26 (DQ-001 → DQ-026) |
 | **Tech stack** | SQL Server (T-SQL), Power BI, GitHub |
 
 ## What This Project Covers
@@ -61,7 +61,7 @@ Pharmacy-RCM-Project/
     ├── medallion-architecture.md  # Bronze/Silver/Gold design and pipeline coverage
     ├── data-dictionary.md         # full column-level dictionary for all 22 tables + Gold view mapping
     ├── data_quality-rules.md      # data quality rules applied across the project
-    ├── data_quality_issue_log.md  # 25 catalogued data quality issues (DQ-001–DQ-025)
+    ├── data_quality_issue_log.md  # 26 catalogued data quality issues (DQ-001–DQ-026)
     ├── dashboard-plan.md          # final 19-page Power BI dashboard structure, page by page
     └── galaxy schema.drawio.png   # Gold-layer fact/dimension relationship diagram
 ```
