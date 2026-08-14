@@ -5,7 +5,6 @@ This document outlines the planned dashboard direction for the hospital analytic
 
 ## Dashboard Goals
 - Translate cleaned hospital data into meaningful business insight.
-- Present KPIs clearly for portfolio and interview use.
 - Connect operational workflows with financial performance.
 - Highlight data quality awareness and metric design maturity.
 
