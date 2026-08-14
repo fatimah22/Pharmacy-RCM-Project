@@ -11,7 +11,7 @@ This is a completed, end-to-end healthcare analytics portfolio project centered 
 - Translate cleaned data into a business-facing Power BI dashboard covering the full claim lifecycle — from submission to denial to recovery.
 
 ## What Was Delivered
-- **22 source tables** profiled, cleaned, and prepared through the medallion pipeline (19 with a full Bronze → QA → Silver → Gold pipeline, plus `llm_finetune`, `simulated_nhis_healthcare_claims`, and `train_test_split` as lighter-weight, ML/reference-support tables documented at the Silver level).
+- **19 source tables** profiled, cleaned, and prepared through a full Bronze → QA → Silver → Gold medallion pipeline. Three additional tables (`llm_finetune`, `simulated_nhis_healthcare_claims`, `train_test_split`) are documented in the data dictionary for historical reference only — their pipelines were removed from the final delivery, they never reached Gold, and they are **not** counted among the 19.
 - **37 Gold-layer views** (fact + dimension) built across all pipelines.
 - **15 Gold-layer views** selected and connected into the final Power BI semantic model, spanning `careplans`, `claims_main`, `denial_labels`, `encounters`, `medications`, `organizations`, `patients`, `payer_rules`, and `payers`. See [`data-dictionary.md`](./data-dictionary.md) for the full table-to-view mapping.
 - A **19-page Power BI dashboard** ("RCM Analytics – Pharmacy & Revenue Cycle") covering Executive Overview, Utilization & Population context, Payer/Specialty/Claims activity, Prior Authorization & Claim Outcomes, Denial & Financial Impact, and Recovery & Appeals Strategy. See [`dashboard-plan.md`](./dashboard-plan.md) for the full page-by-page structure.
@@ -40,11 +40,11 @@ This is a completed, end-to-end healthcare analytics portfolio project centered 
 - GitHub for project structure and version control
 
 ## Project Deliverables
-- SQL scripts for Bronze table creation and loading (22 tables)
+- SQL scripts for Bronze table creation and loading (19 tables)
 - Data quality checks (QA scripts) for source tables
 - Silver-layer cleaning and standardization logic
 - Gold-layer analytical views (37 views; 15 used in the final dashboard)
-- Data dictionary covering all 22 tables, with Gold-view usage flagged
+- Data dictionary covering the 19 cleaned tables (plus 3 reference-only tables kept for historical context), with Gold-view usage flagged
 - Data quality rules and issue log (26 catalogued issues)
 - 19-page Power BI dashboard, documented in `dashboard-plan.md`
 - GitHub-ready, medallion-organized project structure

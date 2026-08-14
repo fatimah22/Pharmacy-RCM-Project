@@ -8,13 +8,14 @@ This document provides the **Data Dictionary** for all tables in the Hospital Pr
 - Key types (PK/FK) reflect the final design used across the pipelines.
 - Business descriptions are written from an analytics/RCM perspective.
 - Each table section lists the **Gold-layer views** built from it. Views marked **⭐ Used in Final Dashboard** are part of the 15 Gold views connected to the delivered Power BI model (see `image.jpg` / Power BI Data pane). Views without the star exist in the Gold layer but were not wired into the final report.
-- 19 of the 22 tables have a full Bronze → QA → Silver → Gold medallion pipeline under `SQL/2_Tables/`. The remaining 3 (`llm_finetune`, `simulated_nhis_healthcare_claims`, `train_test_split`) are lighter, ML/reference-support tables — documented at the Silver level; their pipelines were removed from the final SQL folder since they are not part of the delivered RCM dashboard.
+- **19 tables** have a full Bronze → QA → Silver → Gold medallion pipeline under `SQL/2_Tables/` and make up the project's "tables cleaned" count. An additional 3 tables (`llm_finetune`, `simulated_nhis_healthcare_claims`, `train_test_split`) are lighter, ML/reference-support tables kept in this dictionary for historical reference only — documented at the Silver level, their pipelines were removed from the final SQL folder, and they are **not** counted among the 19 since they are not part of the delivered RCM dashboard.
 
 # Data Dictionary
 
 **Project:** Hospital Analytics – Pharmacy & Revenue Cycle Management
 **Layer:** Silver / Gold
-**Tables Cleaned:** 22
+**Tables Cleaned:** 19
+**Additional Reference-Only Tables (not counted above):** 3 (`llm_finetune`, `simulated_nhis_healthcare_claims`, `train_test_split`)
 **Gold Views Built:** 37 (15 used in the final Power BI dashboard)
 **Last Updated:** August 2026
 

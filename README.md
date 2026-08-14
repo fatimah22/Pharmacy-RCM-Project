@@ -8,7 +8,7 @@ An end-to-end healthcare analytics project that takes raw hospital source data t
 
 | | |
 |---|---|
-| **Tables cleaned** | 20 (19 with a full Bronze → QA → Silver → Gold pipeline) |
+| **Tables cleaned** | 19 (full Bronze → QA → Silver → Gold pipeline) |
 | **Gold-layer views built** | 37 (fact + dimension) |
 | **Gold views used in the final dashboard** | 15 |
 | **Dashboard** | 19-page Power BI report — "RCM Analytics – Pharmacy & Revenue Cycle" |
@@ -59,7 +59,7 @@ Pharmacy-RCM-Project/
 └── docs/
     ├── project-overview.md        # project goals, scope, and final deliverables
     ├── medallion-architecture.md  # Bronze/Silver/Gold design and pipeline coverage
-    ├── data-dictionary.md         # full column-level dictionary for all 22 tables + Gold view mapping
+    ├── data-dictionary.md         # column-level dictionary for the 19 cleaned tables (+ 3 reference-only tables) + Gold view mapping
     ├── data_quality-rules.md      # data quality rules applied across the project
     ├── data_quality_issue_log.md  # 26 catalogued data quality issues (DQ-001–DQ-026)
     ├── dashboard-plan.md          # final 19-page Power BI dashboard structure, page by page
@@ -91,7 +91,7 @@ Full page-by-page breakdown: [`docs/dashboard-plan.md`](./docs/dashboard-plan.md
 Every table went through structured Bronze-level QA before cleaning. Issues found (duplicate keys, conflicting code-to-description mappings, referential mismatches, business-rule violations) are catalogued with severity ratings and the Silver-layer fix applied — see [`docs/data_quality_issue_log.md`](./docs/data_quality_issue_log.md) and [`docs/data_quality-rules.md`](./docs/data_quality-rules.md).
 
 ## Data Dictionary
-A complete, column-level data dictionary for all 22 tables — including which Gold views each table produces and which 15 of those feed the final dashboard — is available at [`docs/data-dictionary.md`](./docs/data-dictionary.md).
+A complete, column-level data dictionary for the 19 cleaned tables (plus 3 reference-only tables kept for historical context) — including which Gold views each table produces and which 15 of those feed the final dashboard — is available at [`docs/data-dictionary.md`](./docs/data-dictionary.md).
 
 ## Author
 **Fatimah Bin Awdhah** — Data Analyst (SQL Server · Power BI · DAX), transitioning from an engineering/stress-analysis background into healthcare and RCM analytics.

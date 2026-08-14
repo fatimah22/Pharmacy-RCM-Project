@@ -1,7 +1,7 @@
 # Medallion Architecture
 
 ## Overview
-This project implements a full medallion architecture with three schemas in SQL Server: **bronze**, **silver**, and **gold**. All **22 source tables** were taken through this pipeline, with **19 of them** carried all the way to a complete Bronze → QA → Silver → Gold build, and the final Power BI dashboard connecting to **15 of the 37 Gold-layer views** produced. This structure keeps raw ingestion, cleaning, and business-facing reporting clearly separated, which makes the project straightforward to explain end-to-end in an interview.
+This project implements a full medallion architecture with three schemas in SQL Server: **bronze**, **silver**, and **gold**. **19 source tables** were carried all the way through a complete Bronze → QA → Silver → Gold build, and the final Power BI dashboard connects to **15 of the 37 Gold-layer views** produced. (Three additional Silver-only support tables are documented separately — see Pipeline Coverage below — and are not counted among the 19.) This structure keeps raw ingestion, cleaning, and business-facing reporting clearly separated, which makes the project straightforward to explain end-to-end in an interview.
 
 ## Bronze Layer
 The Bronze layer stores raw imported source data with minimal transformation.
@@ -53,7 +53,7 @@ The Gold layer contains business-facing views only — **no physical Gold tables
 - With multiple fact views (`fact_claims_main`, `fact_encounters`, `fact_careplans`, `fact_medications`, `fact_denial_labels`, …) sharing common dimensions (`dim_patients`, `dim_payers`, …), the Gold layer forms a **galaxy (fact-constellation) schema** rather than a single star — see `galaxy schema.drawio.png` for the relationship diagram.
 - Only **15 of the 37 Gold views** were connected into the final Power BI model — see the [Gold Layer Views Used in the Final Dashboard](./data-dictionary.md#gold-layer-views-used-in-the-final-dashboard-15-total) table in the data dictionary for the exact list and source-table mapping.
 
-## Pipeline Coverage: 22 Tables, Two Tiers
+## Pipeline Coverage: 19 Delivered Tables + 3 Reference-Only Tables
 
 | Tier | Tables | Treatment |
 |---|---|---|
@@ -71,4 +71,4 @@ This structure demonstrates the full analytics engineering lifecycle expected in
 - dimensional (fact/dimension, galaxy-schema) modeling for reporting (Gold),
 - and a clear, traceable link from every dashboard KPI back to a specific Gold view and Silver transformation.
 
-It also makes the project easy to explain in interviews, since each of the 22 tables can be walked from raw CSV to final KPI in four well-defined steps.
+It also makes the project easy to explain in interviews, since each of the 19 delivered tables can be walked from raw CSV to final KPI in four well-defined steps.
