@@ -8,7 +8,7 @@ An end-to-end healthcare analytics project that takes raw hospital source data t
 
 | | |
 |---|---|
-| **Tables cleaned** | 22 (19 with a full Bronze → QA → Silver → Gold pipeline) |
+| **Tables cleaned** | 20 (19 with a full Bronze → QA → Silver → Gold pipeline) |
 | **Gold-layer views built** | 37 (fact + dimension) |
 | **Gold views used in the final dashboard** | 15 |
 | **Dashboard** | 19-page Power BI report — "RCM Analytics – Pharmacy & Revenue Cycle" |
