@@ -92,7 +92,7 @@ Every table went through structured Bronze-level QA before cleaning. Issues foun
 A complete, column-level data dictionary for the 19 cleaned tables (plus 3 reference-only tables kept for historical context) — including which Gold views each table produces and which 15 of those feed the final dashboard — is available at [`docs/data-dictionary.md`](./docs/data-dictionary.md).
 
 ## Project Planning on Notion
-https://app.notion.com/p/Pharmacy-Revenue-Cycle-Management-RCM-Analytics-3902af076f0f80d6a649f008e31b4210?source=copy_link
+[`NOTION`](https://app.notion.com/p/Pharmacy-Revenue-Cycle-Management-RCM-Analytics-3902af076f0f80d6a649f008e31b4210?source=copy_link)
 
 ## Author
 **Fatimah Bin Awdhah** — Data Analyst (SQL Server · Power BI · DAX), transitioning from an engineering/stress-analysis background into healthcare and RCM analytics.
