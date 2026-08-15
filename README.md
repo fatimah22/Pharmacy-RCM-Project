@@ -66,8 +66,6 @@ Pharmacy-RCM-Project/
     └── galaxy schema.drawio.png   # Gold-layer fact/dimension relationship diagram
 ```
 
-> Note: `llm_finetune`, `simulated_nhis_healthcare_claims`, and `train_test_split` are 3 additional source tables that were cleaned to the Silver layer for a separate ML/fraud-detection exercise. They are documented in `docs/data-dictionary.md` but their SQL pipeline folders were removed from the final repository since they do not feed the Gold layer or the delivered dashboard.
-
 ## Architecture at a Glance
 - **Bronze** — raw CSV data loaded as-is into `bronze.<table>`, profiled with a dedicated QA script per table.
 - **Silver** — cleaned, standardized, and conformed in `silver.<table>`: trimmed text, resolved/flagged conflicting codes, derived reporting fields (e.g. `Encounter_Year`, `Claim_Quarter`).
